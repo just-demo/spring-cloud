@@ -1,0 +1,8 @@
+rootProject.name = 'spring-cloud'
+include 'config-server'
+include 'config-client'
+include 'gateway'
+include 'naming-server'
+include 'resilient'
+include 'service-one'
+include 'service-two'
