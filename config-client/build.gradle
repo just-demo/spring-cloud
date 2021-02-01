@@ -1,5 +1,15 @@
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.cloud:spring-cloud-starter-config'
+
+	// Allows reloading config with POST /actuator/refresh
+	implementation 'org.springframework.boot:spring-boot-starter-actuator'
+	// Allows reloading config for all clients with POST /actuator/busrefresh
+	// In order to trigger refreshing from server side add the same dependencies and expose /actuator/busrefresh there
+	// TODO: is there any better way to trigger refreshing from server side?
+	implementation 'org.springframework.cloud:spring-cloud-bus'
+	implementation 'org.springframework.boot:spring-boot-starter-amqp'
+	implementation 'org.springframework.cloud:spring-cloud-stream-binder-rabbit'
+
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
