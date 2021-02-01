@@ -20,3 +20,4 @@ Examples:
 2. TODO: debug headers to see how sleuth tracing works
 3. TODO: implement security
 4. TODO: make docker-compose-all.yml work
+5. TODO: reuse configuration for gradle modules

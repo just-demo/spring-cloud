@@ -21,7 +21,7 @@ class ResilientControllerTest {
 
     @Test
     void testFallback() throws Exception {
-        mockMvc.perform(get("/resilient/fallback"))
+        mockMvc.perform(get("/fallback"))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().string(containsString("Fallback for")));
