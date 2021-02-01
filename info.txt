@@ -19,4 +19,4 @@ Examples:
 // TODO: try reloading configuration using actuator
 2. TODO: debug headers to see how sleuth tracing works
 3. TODO: implement security
-4. TODO: make docker-compose-all.yml work
+

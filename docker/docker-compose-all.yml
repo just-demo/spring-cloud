@@ -1,8 +1,30 @@
 version: '3.7'
 services:
+  rabbitmq:
+    image: rabbitmq:3.5.3-management
+    ports:
+      - 5672:5672
+      - 15672:15672
+  zipkin:
+    image: openzipkin/zipkin:2.23
+    ports:
+      - 9411:9411
+    environment:
+      - RABBIT_URI=amqp://rabbitmq
+    depends_on:
+      - rabbitmq
+  config-client:
+    image: config-client:0.0.1-SNAPSHOT
+    ports:
+      - 8700:8700
+    depends_on:
+      - config-server
+  config-server:
+    image: config-server:0.0.1-SNAPSHOT
+    ports:
+      - 8888:8888
   gateway:
     image: gateway:0.0.1-SNAPSHOT
-    mem_limit: 700m
     ports:
       - 8765:8765
     depends_on:
@@ -14,9 +36,16 @@ services:
       - RABBIT_URI=amqp://rabbitmq
       - spring.rabbitmq.host=rabbitmq
       - spring.zipkin.sender.type=rabbit
-  service-two:
-    image: serivce-two:0.0.1-SNAPSHOT
-    mem_limit: 700m
+  naming-server:
+    image: naming-server:0.0.1-SNAPSHOT
+    ports:
+      - 8761:8761
+  resilient:
+    image: resilient:0.0.1-SNAPSHOT
+    ports:
+      - 8600:8600
+  service-one:
+    image: service-one:0.0.1-SNAPSHOT
     ports:
       - 8100:8100
     depends_on:
@@ -28,11 +57,10 @@ services:
       - RABBIT_URI=amqp://rabbitmq
       - spring.rabbitmq.host=rabbitmq
       - spring.zipkin.sender.type=rabbit
-  service-one:
-    image: service-one:0.0.1-SNAPSHOT
-    mem_limit: 700m
+  service-two:
+    image: service-two:0.0.1-SNAPSHOT
     ports:
-      - 8000:8000
+      - 8200:8200
     depends_on:
       - naming-server
       - rabbitmq
@@ -42,23 +70,3 @@ services:
       - RABBIT_URI=amqp://rabbitmq
       - spring.rabbitmq.host=rabbitmq
       - spring.zipkin.sender.type=rabbit
-  naming-server:
-    image: naming-server:0.0.1-SNAPSHOT
-    mem_limit: 700m
-    ports:
-      - 8761:8761
-  zipkin:
-    image: openzipkin/zipkin:2.23
-    mem_limit: 300m
-    ports:
-      - 9411:9411
-    environment:
-      - RABBIT_URI=amqp://rabbitmq
-    depends_on:
-      - rabbitmq
-  rabbitmq:
-    image: rabbitmq:3.5.3-management
-    mem_limit: 300m
-    ports:
-      - 5672:5672
-      - 15672:15672
