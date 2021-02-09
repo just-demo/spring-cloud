@@ -3,7 +3,6 @@ TODO: try implementing security two ways:
 2) Using SSO https://spring.io/projects/spring-cloud-security
 
 https://cloud.spring.io/spring-cloud-security/reference/html/
-https://spring.io/blog/2019/08/16/securing-services-with-spring-cloud-gateway
 https://www.baeldung.com/spring-cloud-securing-services
 
 https://spring.io/blog/2019/08/16/securing-services-with-spring-cloud-gateway
@@ -16,7 +15,9 @@ gradlew bootBuildImage
 =========================
 Examples:
 1. Centralized configuration
-// TODO: try reloading configuration using actuator
-2. TODO: debug headers to see how sleuth tracing works
+2. TODO: debug headers to see how sleuth tracing works - no luck?
 3. TODO: implement security
+4.  a) Ribbon -> Spring Cloud LoadBalancer
+    b) Zuul -> Spring Cloud Gateway
+    c) Hystrix -> Resilience4j
 
