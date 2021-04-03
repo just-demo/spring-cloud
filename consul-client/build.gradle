@@ -1,4 +1,6 @@
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.cloud:spring-cloud-starter-consul-discovery'
+	// Just to enable health check to make Consul server happy, not really required to make the service discoverable and accessible
+	implementation 'org.springframework.boot:spring-boot-starter-actuator'
 }
