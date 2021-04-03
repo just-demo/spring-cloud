@@ -24,11 +24,11 @@ public class ConfigClientController {
     @Autowired
     private Environment environment;
 
-    @Value("${config-client.demo}")
-    private String demo;
+    @Value("${demo.value}")
+    private String value;
 
     @GetMapping
     public List<String> get() {
-        return asList(config.getDemo(), environment.getProperty("config-client.demo"), demo);
+        return asList(config.getValue(), environment.getProperty("demo.value"), value);
     }
 }

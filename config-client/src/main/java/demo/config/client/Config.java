@@ -4,15 +4,15 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
 @Component
-@ConfigurationProperties("config-client")
+@ConfigurationProperties("demo")
 public class Config {
-    private String demo;
+    private String value;
 
-    public void setDemo(String demo) {
-        this.demo = demo;
+    public String getValue() {
+        return value;
     }
 
-    public String getDemo() {
-        return demo;
+    public void setValue(String value) {
+        this.value = value;
     }
 }
