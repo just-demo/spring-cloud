@@ -1,4 +1,5 @@
 rootProject.name = 'spring-cloud'
+include 'config-properites'
 include 'config-client'
 include 'config-client-discovery'
 include 'config-server'
