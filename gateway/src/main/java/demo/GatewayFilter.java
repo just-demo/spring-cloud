@@ -1,4 +1,4 @@
-package demo.gateway;
+package demo;
 
 import org.slf4j.Logger;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;

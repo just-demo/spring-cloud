@@ -1,4 +1,4 @@
-package demo.service.one;
+package demo;
 
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;

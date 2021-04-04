@@ -1,13 +1,13 @@
-package demo.config.client;
+package demo;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ConfigClientApplication {
+public class ResilientApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ConfigClientApplication.class, args);
+		SpringApplication.run(ResilientApplication.class, args);
 	}
 
 }

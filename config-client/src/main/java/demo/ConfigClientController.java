@@ -1,4 +1,4 @@
-package demo.config.client;
+package demo;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;

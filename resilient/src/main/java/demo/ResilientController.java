@@ -1,4 +1,4 @@
-package demo.resilient;
+package demo;
 
 import io.github.resilience4j.bulkhead.annotation.Bulkhead;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
