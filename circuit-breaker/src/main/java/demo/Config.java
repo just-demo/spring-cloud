@@ -19,7 +19,7 @@ public class Config {
     }
 
     @Bean
-    public Customizer<Resilience4JCircuitBreakerFactory> defaultCircuitBreakerCustomizer() {
+    public Customizer<Resilience4JCircuitBreakerFactory> defaultResilience4JCustomizer() {
         return factory -> factory.configureDefault(id -> new Resilience4JConfigBuilder(id)
                 .timeLimiterConfig(TimeLimiterConfig.custom()
                         // ...
@@ -31,15 +31,14 @@ public class Config {
     }
 
     @Bean
-    public Customizer<Resilience4JCircuitBreakerFactory> demoCircuitBreakerCustomizer() {
+    public Customizer<Resilience4JCircuitBreakerFactory> demoResilience4JCustomizer() {
         return factory -> factory.configure(builder -> builder
                 .circuitBreakerConfig(CircuitBreakerConfig.custom()
                         .minimumNumberOfCalls(5) // default is 100
                         .waitDurationInOpenState(Duration.ofSeconds(3)) // default is 60s
                         .build())
                 .timeLimiterConfig(TimeLimiterConfig.custom()
-                        .timeoutDuration(Duration.ofSeconds(5)) // default is 1s
-                        .build()
-                ), "demo");
+                        .timeoutDuration(Duration.ofSeconds(2)) // default is 1s
+                        .build()), "demo");
     }
 }
