@@ -39,6 +39,6 @@ public class Config {
                         .build())
                 .timeLimiterConfig(TimeLimiterConfig.custom()
                         .timeoutDuration(Duration.ofSeconds(2)) // default is 1s
-                        .build()), "demo");
+                        .build()), "demo-fail", "demo-delay");
     }
 }
