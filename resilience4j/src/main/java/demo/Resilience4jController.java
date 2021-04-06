@@ -14,7 +14,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import static org.slf4j.LoggerFactory.getLogger;
 
 @RestController
-public class ResilientController {
+public class Resilience4jController {
     private final Logger logger = getLogger(getClass());
     private final AtomicInteger counter = new AtomicInteger();
 
