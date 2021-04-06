@@ -1,0 +1,11 @@
+gradlew bootBuildImage
+docker image ls
+
+http://localhost:8761/
+http://localhost:9411/
+http://localhost:8100/
+http://localhost:8200/
+http://localhost:8000/one
+http://localhost:8000/two
+http://localhost:8000/one/test
+http://localhost:8000/two/test

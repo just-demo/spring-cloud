@@ -1,58 +1,45 @@
-version: '3.7'
+version: "3.8"
 services:
   rabbitmq:
-    image: rabbitmq:3.5.3-management
+    image: rabbitmq:3.8.14-management
     ports:
       - 5672:5672
       - 15672:15672
   zipkin:
-    image: openzipkin/zipkin:2.23
+    image: openzipkin/zipkin:2.23.2
     ports:
       - 9411:9411
     environment:
       - RABBIT_URI=amqp://rabbitmq
     depends_on:
       - rabbitmq
-  config-client:
-    image: config-client:0.0.1-SNAPSHOT
+    restart: on-failure
+  eureka-server:
+    image: eureka-server:0.0.1-SNAPSHOT
     ports:
-      - 8700:8700
-    depends_on:
-      - config-server
-  config-server:
-    image: config-server:0.0.1-SNAPSHOT
-    ports:
-      - 8888:8888
+      - 8761:8761
   gateway:
     image: gateway:0.0.1-SNAPSHOT
     ports:
-      - 8765:8765
+      - 8000:8000
     depends_on:
-      - naming-server
+      - eureka-server
       - rabbitmq
     environment:
-      - eureka.client.serviceUrl.defaultZone=http://naming-server:8761/eureka/
+      - eureka.client.serviceUrl.defaultZone=http://eureka-server:8761/eureka/
       - spring.zipkin.baseUrl=http://zipkin:9411/
       - RABBIT_URI=amqp://rabbitmq
       - spring.rabbitmq.host=rabbitmq
       - spring.zipkin.sender.type=rabbit
-  naming-server:
-    image: naming-server:0.0.1-SNAPSHOT
-    ports:
-      - 8761:8761
-  resilient:
-    image: resilient:0.0.1-SNAPSHOT
-    ports:
-      - 8600:8600
   service-one:
     image: service-one:0.0.1-SNAPSHOT
     ports:
       - 8100:8100
     depends_on:
-      - naming-server
+      - eureka-server
       - rabbitmq
     environment:
-      - eureka.client.serviceUrl.defaultZone=http://naming-server:8761/eureka/
+      - eureka.client.serviceUrl.defaultZone=http://eureka-server:8761/eureka/
       - spring.zipkin.baseUrl=http://zipkin:9411/
       - RABBIT_URI=amqp://rabbitmq
       - spring.rabbitmq.host=rabbitmq
@@ -62,10 +49,10 @@ services:
     ports:
       - 8200:8200
     depends_on:
-      - naming-server
+      - eureka-server
       - rabbitmq
     environment:
-      - eureka.client.serviceUrl.defaultZone=http://naming-server:8761/eureka/
+      - eureka.client.serviceUrl.defaultZone=http://eureka-server:8761/eureka/
       - spring.zipkin.baseUrl=http://zipkin:9411/
       - RABBIT_URI=amqp://rabbitmq
       - spring.rabbitmq.host=rabbitmq

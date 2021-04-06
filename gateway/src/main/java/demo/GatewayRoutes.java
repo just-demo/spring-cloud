@@ -20,10 +20,11 @@ public class GatewayRoutes {
                                 .addRequestParameter("CustomParamName", "CustomParamValue"))
                         .uri("http://httpbin.org"))
                 .route(p -> p.path("/one/**")
-                        .filters(f -> f.rewritePath("/one/(.*)", "/$1"))
+                        // when stripping prefix make sure there is always a leading slash left
+                         .filters(f -> f.rewritePath("/one(/(.*))?", "/$1"))
                         .uri("lb://service-one"))
                 .route(p -> p.path("/two/**")
-                        .filters(f -> f.rewritePath("/two/(.*)", "/$1"))
+                        .filters(f -> f.stripPrefix(1))
                         .uri("lb://service-two"))
                 .build();
     }
