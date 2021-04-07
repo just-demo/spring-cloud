@@ -1,5 +1,5 @@
 gradlew bootBuildImage
-docker image ls
+docker-compose up --scale service-one=2
 
 http://localhost:8761/
 http://localhost:9411/
