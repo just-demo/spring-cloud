@@ -1,0 +1,5 @@
+gradlew eureka-server:bootBuildImage
+gradlew feign-client:bootBuildImage
+docker-compose up --scale feign-service=2
+TODO: remove v1 - v2 that do not work with docker compose
+TODO: docker compose does not support load balancing, try kubernetes instead!
