@@ -3,13 +3,10 @@ package demo;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
-import static java.net.InetAddress.getLocalHost;
 import static java.util.Collections.singletonMap;
 import static org.slf4j.LoggerFactory.getLogger;
 
@@ -20,6 +17,7 @@ public class ServiceOneController {
     @Autowired
     private Environment environment;
 
+    // fetch('/').then(r => r.text()).then(console.log)
     @GetMapping
     public Map<String, String> index() {
         logger.info("index");
@@ -29,9 +27,24 @@ public class ServiceOneController {
         );
     }
 
-    @GetMapping("/{text}")
-    public Map<String, String> echo(@PathVariable String text) {
-        logger.info("echo: {}", text);
-        return singletonMap(environment.getProperty("spring.application.name"), text);
+    // fetch('/echo/demo-path').then(r => r.text()).then(console.log)
+    @GetMapping("/echo/{path}")
+    public Map<String, String> echoPath(@PathVariable String path) {
+        logger.info("echoPath: {}", path);
+        return singletonMap(environment.getProperty("spring.application.name"), path);
+    }
+
+    // fetch('/echo?param=demo-param').then(r => r.text()).then(console.log)
+    @GetMapping("/echo")
+    public Map<String, String> echoParam(@RequestParam("param") String param) {
+        logger.info("echoParam: {}", param);
+        return singletonMap(environment.getProperty("spring.application.name"), param);
+    }
+
+    // fetch('/echo', {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({demo: 'body'})}).then(r => r.text()).then(console.log)
+    @PostMapping("/echo")
+    public Map<String, Map<String, String>> echoBody(@RequestBody Map<String, String> body) {
+        logger.info("echoBody: {}", body);
+        return singletonMap(environment.getProperty("spring.application.name"), body);
     }
 }
