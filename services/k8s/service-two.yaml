@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: service-two-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: service-two
+  template:
+    metadata:
+      labels:
+        component: service-two
+    spec:
+      containers:
+        - name: service-two
+          image: service-two:0.0.1-SNAPSHOT
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8200
+          env:
+            - name: server.port
+              value: '8200'
+            - name: eureka.client.serviceUrl.defaultZone
+              value: http://eureka-cluster-ip:8761/eureka/
+            - name: spring.zipkin.baseUrl
+              value: http://zipkin-cluster-ip:9411/
+            - name: RABBIT_URI
+              value: amqp://rabbitmq-cluster-ip
+            - name: spring.rabbitmq.host
+              value: rabbitmq-cluster-ip
+            - name: spring.zipkin.sender.type
+              value: rabbit
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: service-two-cluster-ip
+spec:
+  type: LoadBalancer
+  selector:
+    component: service-two
+  ports:
+    - port: 8200
+      targetPort: 8200

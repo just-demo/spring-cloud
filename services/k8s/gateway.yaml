@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gateway-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: gateway
+  template:
+    metadata:
+      labels:
+        component: gateway
+    spec:
+      containers:
+        - name: gateway
+          image: gateway:0.0.1-SNAPSHOT
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8000
+          env:
+            - name: server.port
+              value: '8000'
+            - name: eureka.client.serviceUrl.defaultZone
+              value: http://eureka-cluster-ip:8761/eureka/
+            - name: spring.zipkin.baseUrl
+              value: http://zipkin-cluster-ip:9411/
+            - name: RABBIT_URI
+              value: amqp://rabbitmq-cluster-ip
+            - name: spring.rabbitmq.host
+              value: rabbitmq-cluster-ip
+            - name: spring.zipkin.sender.type
+              value: rabbit
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: gateway-cluster-ip
+spec:
+  type: LoadBalancer
+  selector:
+    component: gateway
+  ports:
+    - port: 8000
+      targetPort: 8000

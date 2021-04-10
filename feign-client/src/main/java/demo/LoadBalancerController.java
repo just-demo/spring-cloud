@@ -26,12 +26,6 @@ public class LoadBalancerController {
     @Autowired
     private LoadBalancerClientV3 loadBalancerClientV3;
 
-    @Autowired
-    private LoadBalancerClientV4 loadBalancerClientV4;
-
-    @Autowired
-    private LoadBalancerClientV5 loadBalancerClientV5;
-
     @GetMapping("{version}")
     public String balance(@PathVariable String version) {
         switch (version) {
@@ -41,10 +35,6 @@ public class LoadBalancerController {
                 return loadBalancerClientV2.index();
             case "v3":
                 return loadBalancerClientV3.index();
-            case "v4":
-                return loadBalancerClientV4.index();
-            case "v5":
-                return loadBalancerClientV5.index();
             default:
                 return "Unsupported version: " + version;
         }

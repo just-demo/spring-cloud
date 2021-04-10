@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Map;
 
+import static java.net.InetAddress.getLocalHost;
 import static org.slf4j.LoggerFactory.getLogger;
 
 @RestController
@@ -22,19 +23,18 @@ public class ServiceTwoController {
     private ServiceOneClient serviceOneClient;
 
     @GetMapping
-    public Map<String, String> index() {
+    public Map<String, String> index() throws Exception {
         logger.info("index");
         Map<String, String> response = serviceOneClient.index();
-        response.put(environment.getProperty("spring.application.name"),
-                environment.getProperty("local.server.port"));
+        response.put(getLocalHost().getHostName(), environment.getProperty("local.server.port"));
         return response;
     }
 
     @GetMapping("/{text}")
-    public Map<String, String> echo(@PathVariable String text) {
+    public Map<String, String> echo(@PathVariable String text) throws Exception {
         logger.info("echo: {}", text);
         Map<String, String> response = serviceOneClient.echo(text);
-        response.put(environment.getProperty("spring.application.name"), text);
+        response.put(getLocalHost().getHostName(), text);
         return response;
     }
 }

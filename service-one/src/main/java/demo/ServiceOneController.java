@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Map;
 
+import static java.net.InetAddress.getLocalHost;
 import static java.util.Collections.singletonMap;
 import static org.slf4j.LoggerFactory.getLogger;
 

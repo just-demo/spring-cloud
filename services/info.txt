@@ -1,11 +1,36 @@
+##################################################
+################# docker-compose #################
+##################################################
 gradlew bootBuildImage
+cd services
 docker-compose up --scale service-one=2
 
+# test links below
+##################################################
+################### kubernetes ###################
+##################################################
+minikube start
+@FOR /f "tokens=*" %i IN ('minikube -p minikube docker-env') DO @%i
+gradlew bootBuildImage
+# TODO: with given deployment files service discovery does not seem to work inside k8s cluster, that's why only those apps that do not try to lookup dependencies work:
+#       service-one, zipkin, eureka - work
+#       service-two, gateway - do not work
+kubectl apply -f services/k8s
+minikube tunnel
+
+# test links below
+
+# kubectl delete -f services/k8s
+minikube delete
+##################################################
+##################### links ######################
+##################################################
 http://localhost:8761/
 http://localhost:9411/
-http://localhost:8100/
-http://localhost:8200/
+http://localhost:8100/    # does not work because port is set to dynamic
+http://localhost:8200/    # does not work because port is set to dynamic
 http://localhost:8000/one
 http://localhost:8000/two
 http://localhost:8000/one/test
 http://localhost:8000/two/test
+##################################################
