@@ -9,6 +9,7 @@ dependencies {
 	// In order to trigger refreshing from server side add the same dependencies and expose /actuator/busrefresh there
 	// TODO: is there any better way to trigger refreshing from server side?
 	implementation 'org.springframework.cloud:spring-cloud-bus'
-	implementation 'org.springframework.boot:spring-boot-starter-amqp'
+	// amqp dependency does not seem to be needed!
+	// implementation 'org.springframework.boot:spring-boot-starter-amqp'
 	implementation 'org.springframework.cloud:spring-cloud-stream-binder-rabbit'
 }
