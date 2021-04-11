@@ -1,5 +1,6 @@
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+	// Needed for v4 only
 	implementation 'org.springframework.cloud:spring-cloud-starter-loadbalancer'
 	// Needed for all except v4
 	implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
