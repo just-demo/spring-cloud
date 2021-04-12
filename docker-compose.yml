@@ -14,6 +14,14 @@ services:
     depends_on:
       - rabbitmq
     restart: on-failure
+  config-server:
+    image: config-server:0.0.1-SNAPSHOT
+    ports:
+      - 8888:8888
+    environment:
+      - spring.cloud.config.server.native.search-locations=/app/config
+    volumes:
+      - ./config:/app/config
   eureka-server:
     image: eureka-server:0.0.1-SNAPSHOT
     ports:
@@ -34,6 +42,7 @@ services:
   service-one:
     image: service-one:0.0.1-SNAPSHOT
     depends_on:
+      - config-server # TODO: move to Gateway
       - eureka-server
       - rabbitmq
     environment:
