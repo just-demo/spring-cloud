@@ -14,14 +14,11 @@ public class GatewayConfig {
                 .route(p -> p.path("/test")
                         .filters(f -> f
                                 .addRequestHeader("demo", "header")
-                                .addRequestParameter("demo", "param"))
+                                .addRequestParameter("demo", "param")
+                                .setPath("/anything"))
                         .uri("http://httpbin.org"))
-                .route(p -> p.path("/one/**")
-                        .filters(f -> f.stripPrefix(1))
-                        .uri("lb://service-one"))
-                .route(p -> p.path("/two/**")
-                        .filters(f -> f.rewritePath("/two(/(.*))?", "/$2"))
-                        .uri("lb://service-two"))
+                .route(p -> p.path("/one/**").filters(f -> f.stripPrefix(1)).uri("lb://service-one"))
+                .route(p -> p.path("/two/**").filters(f -> f.stripPrefix(1)).uri("lb://service-two"))
                 .build();
     }
 
