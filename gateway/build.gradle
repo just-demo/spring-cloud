@@ -1,11 +1,11 @@
 dependencies {
 	implementation 'org.springframework.cloud:spring-cloud-starter-gateway'
+
+	// ########## Service discovery ##########
 	implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
 
-	// 1. Adds tracing in logs
+	// ########## Distributed tracing ##########
 	implementation 'org.springframework.cloud:spring-cloud-starter-sleuth'
-	// 2. Pushes tracing to zipkin
 	implementation 'org.springframework.cloud:spring-cloud-sleuth-zipkin'
-	// 3. Pushes tracing to zipkin via rabbitmq
 	implementation 'org.springframework.boot:spring-boot-starter-amqp'
 }

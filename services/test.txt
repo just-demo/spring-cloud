@@ -1,0 +1,3 @@
+gradlew bootBuildImage
+cd services
+docker-compose up --scale service-one=2 service-two=2

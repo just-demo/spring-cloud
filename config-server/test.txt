@@ -1,0 +1,4 @@
+# Centralized Configuration
+http://localhost:8888/service-two/default
+http://localhost:8888/service-two/dev
+http://localhost:8888/service-two/qa
