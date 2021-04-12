@@ -13,7 +13,7 @@ import static java.util.Arrays.asList;
 
 @RefreshScope
 @RestController
-public class ServiceOneConfigController {
+public class GatewayConfigController {
     @Autowired
     private Environment environment;
 

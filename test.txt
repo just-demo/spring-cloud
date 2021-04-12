@@ -16,20 +16,20 @@ http://localhost:8761
 
 4. Gateway
 http://localhost:8000
+http://localhost:8000/config
+    fetch('/actuator/refresh', {method: 'POST'}).then(r => r.text()).then(console.log);
+    fetch('/actuator/busrefresh', {method: 'POST'}).then(r => r.text()).then(console.log);
+http://localhost:8000/fail
+    for (var i = 0; i < 10; i++) fetch('/fail').then(r => r.text()).then(console.log)
+http://localhost:8000/delay/1
+    for (var i = 0; i < 3; i++) fetch('/delay/1').then(r => r.text()).then(console.log)
+http://localhost:8000/delay/3
+    for (var i = 0; i < 3; i++) fetch('/delay/3').then(r => r.text()).then(console.log)
 http://localhost:8000/one
 http://localhost:8000/two
 
 5.1 Service One - Instance 1
 http://localhost:8100
-http://localhost:8100/config
-    fetch('/actuator/refresh', {method: 'POST'}).then(r => r.text()).then(console.log);
-    fetch('/actuator/busrefresh', {method: 'POST'}).then(r => r.text()).then(console.log);
-http://localhost:8100/fail
-    for (var i = 0; i < 10; i++) fetch('/fail').then(r => r.text()).then(console.log)
-http://localhost:8100/delay/1
-    for (var i = 0; i < 3; i++) fetch('/delay/1').then(r => r.text()).then(console.log)
-http://localhost:8100/delay/3
-    for (var i = 0; i < 3; i++) fetch('/delay/3').then(r => r.text()).then(console.log)
 
 5.1 Service One - Instance 2
 http://localhost:8101

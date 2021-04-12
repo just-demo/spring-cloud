@@ -13,7 +13,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import static org.slf4j.LoggerFactory.getLogger;
 
 @RestController
-public class ServiceOneCircuitBreakerController {
+public class GatewayCircuitBreakerController {
     private final Logger logger = getLogger(getClass());
     private final AtomicInteger counter = new AtomicInteger();
 
@@ -23,6 +23,7 @@ public class ServiceOneCircuitBreakerController {
     @Autowired
     private RestTemplate restTemplate;
 
+    // TODO: move it to Gateway routs instead
     @GetMapping("/fail")
     public String fail() {
         return circuitBreakerFactory.create("demo-fail").run(

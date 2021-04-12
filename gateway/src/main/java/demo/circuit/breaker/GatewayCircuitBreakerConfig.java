@@ -11,7 +11,7 @@ import org.springframework.web.client.RestTemplate;
 import java.time.Duration;
 
 @Configuration
-public class ServiceOneCircuitBreakerConfig {
+public class GatewayCircuitBreakerConfig {
     @Bean
     public RestTemplate restTemplate() {
         return new RestTemplate();
