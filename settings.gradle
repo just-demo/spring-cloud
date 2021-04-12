@@ -1,4 +1,4 @@
-rootProject.name = 'spring-cloud'
+rootProject.name = 'spring-cloud-demo'
 include 'config-properites'
 include 'config-client'
 include 'config-client-discovery'

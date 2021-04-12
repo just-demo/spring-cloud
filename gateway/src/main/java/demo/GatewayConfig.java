@@ -20,7 +20,7 @@ public class GatewayConfig {
                         .filters(f -> f.stripPrefix(1))
                         .uri("lb://service-one"))
                 .route(p -> p.path("/two/**")
-                        .filters(f -> f.rewritePath("/one(/|$)(.*)", "/$2"))
+                        .filters(f -> f.rewritePath("/two(/(.*))?", "/$2"))
                         .uri("lb://service-two"))
                 .build();
     }
