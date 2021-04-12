@@ -18,12 +18,12 @@ public class GatewayConfiguration {
         return builder.routes()
                 .route(p -> p.path("/google")
                         .filters(f -> f.setPath("/"))
-                        // TODO: why does it change URL in browser?
                         .uri("https://www.google.com"))
                 .route(p -> p.path("/test")
                         .filters(f -> f
                                 .addRequestHeader("demo", "header")
-                                .addRequestParameter("demo", "param"))
+                                .addRequestParameter("demo", "param")
+                                .setPath("/anything"))
                         .uri("http://httpbin.org"))
                 .route(p -> p.path("/one/**")
                         // when stripping prefix make sure there is always a leading slash left
