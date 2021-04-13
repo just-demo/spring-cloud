@@ -1,24 +1,31 @@
-TODO: bookmark all links
-TODO: add config server to docker-compose
+# Sample Web App
+http://localhost:8080/
+http://localhost:8080/actuator
+####################################################################################################
+gradlew bootBuildImage
+docker-compose up --scale service-one=2 --scale service-two=2
+####################################################################################################
+TODO: bookmark all links or open in a text file
 
-1. RabbitMQ + Zipkin
-docker-compose -f rabbitmq-and-zipkin/docker-compose.yml up
+1. RabbitMQ
 http://localhost:15672 guest/guest
+
+2. Zipkin
 http://localhost:9411
 
-2. Config Server
-http://localhost:8888/service-one/default
-http://localhost:8888/service-one/dev
-http://localhost:8888/service-one/qa
+3. Config Server
+http://localhost:8888/gateway/default
+http://localhost:8888/gateway/dev
+http://localhost:8888/gateway/qa
+    fetch('/actuator/busrefresh', {method: 'POST'}).then(r => r.text()).then(console.log);
 
-3. Eureka Server
+4. Eureka Server
 http://localhost:8761
 
-4. Gateway
+5. Gateway
 http://localhost:8000
 http://localhost:8000/config
     fetch('/actuator/refresh', {method: 'POST'}).then(r => r.text()).then(console.log);
-    fetch('/actuator/busrefresh', {method: 'POST'}).then(r => r.text()).then(console.log);
 http://localhost:8000/fail
     for (var i = 0; i < 10; i++) fetch('/fail').then(r => r.text()).then(console.log)
 http://localhost:8000/delay/1
@@ -28,19 +35,11 @@ http://localhost:8000/delay/3
 http://localhost:8000/one
 http://localhost:8000/two
 
-5.1 Service One - Instance 1
-http://localhost:8100
+6. Service One - Instance 1/2
+http://localhost:****
+http://localhost:****
 
-5.1 Service One - Instance 2
-http://localhost:8101
-
-6.1 Service Two - Instance 1
-http://localhost:8200
-
-6.2 Service Two - Instance 2
-http://localhost:8201
-
-####################################################################################################
-gradlew bootBuildImage
-docker-compose -f services/docker-compose.yml up --scale service-one=2 service-two=2
+7. Service Two - Instance 1/2
+http://localhost:****
+http://localhost:****
 

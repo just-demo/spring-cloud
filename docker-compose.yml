@@ -1,11 +1,13 @@
 version: "3.8"
 services:
   rabbitmq:
+#    image: rabbitmq:3.7.6-management
     image: rabbitmq:3.8.14-management
     ports:
       - 5672:5672
       - 15672:15672
   zipkin:
+#    image: openzipkin/zipkin:2.10.2
     image: openzipkin/zipkin:2.23.2
     ports:
       - 9411:9411
@@ -18,8 +20,12 @@ services:
     image: config-server:0.0.1-SNAPSHOT
     ports:
       - 8888:8888
+    depends_on:
+      - rabbitmq
     environment:
       - spring.cloud.config.server.native.search-locations=/app/config
+#      Bus refresh of clients
+      - spring.rabbitmq.host=rabbitmq
     volumes:
       - ./config:/app/config
   eureka-server:
