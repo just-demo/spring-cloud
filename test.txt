@@ -7,39 +7,34 @@ docker-compose up --scale service-one=2 --scale service-two=2
 ####################################################################################################
 TODO: bookmark all links or open in a text file
 
-1. RabbitMQ
+# RabbitMQ
 http://localhost:15672 guest/guest
 
-2. Zipkin
+# Zipkin
 http://localhost:9411
 
-3. Config Server
+# Config Server
 http://localhost:8888/gateway/default
 http://localhost:8888/gateway/dev
 http://localhost:8888/gateway/qa
     fetch('/actuator/busrefresh', {method: 'POST'}).then(r => r.text()).then(console.log);
 
-4. Eureka Server
+# Eureka Server
 http://localhost:8761
 
-5. Gateway
+# Gateway
 http://localhost:8000
 http://localhost:8000/config
     fetch('/actuator/refresh', {method: 'POST'}).then(r => r.text()).then(console.log);
-http://localhost:8000/fail
-    for (var i = 0; i < 10; i++) fetch('/fail').then(r => r.text()).then(console.log)
-http://localhost:8000/delay/1
-    for (var i = 0; i < 3; i++) fetch('/delay/1').then(r => r.text()).then(console.log)
-http://localhost:8000/delay/3
-    for (var i = 0; i < 3; i++) fetch('/delay/3').then(r => r.text()).then(console.log)
 http://localhost:8000/one
 http://localhost:8000/two
+http://localhost:8000/test
+    # failure
+    for (var i = 0; i < 10; i++) fetch('/test').then(r => r.text()).then(console.log)
+    # delay
+    for (var i = 0; i < 3; i++) fetch('/test').then(r => r.text()).then(console.log)
 
-6. Service One - Instance 1/2
-http://localhost:****
+# Service One/Two - Instance 1/2
 http://localhost:****
 
-7. Service Two - Instance 1/2
-http://localhost:****
-http://localhost:****
 

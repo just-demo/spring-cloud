@@ -26,6 +26,6 @@ public class GatewayCircuitBreakerConfig {
                         .build())
                 .timeLimiterConfig(TimeLimiterConfig.custom()
                         .timeoutDuration(Duration.ofSeconds(2))
-                        .build()), "demo-fail", "demo-delay");
+                        .build()), "test");
     }
 }

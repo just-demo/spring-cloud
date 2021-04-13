@@ -3,8 +3,8 @@ package demo.circuit.breaker;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.circuitbreaker.CircuitBreakerFactory;
+import org.springframework.core.env.Environment;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
@@ -23,18 +23,13 @@ public class GatewayCircuitBreakerController {
     @Autowired
     private RestTemplate restTemplate;
 
-    // TODO: move it to Gateway routs instead
-    @GetMapping("/fail")
-    public String fail() {
-        return circuitBreakerFactory.create("demo-fail").run(
-                () -> query("http://this.url.does.not.exist"),
-                this::fallback);
-    }
+    @Autowired
+    private Environment environment;
 
-    @GetMapping("/delay/{seconds}")
-    public String delay(@PathVariable long seconds) {
-        return circuitBreakerFactory.create("demo-delay").run(
-                () -> query("https://httpbin.org/delay/" + seconds),
+    @GetMapping("/test")
+    public String test() {
+        return circuitBreakerFactory.create("test").run(
+                () -> query(environment.getProperty("test.url")),
                 this::fallback);
     }
 
@@ -44,7 +39,7 @@ public class GatewayCircuitBreakerController {
     }
 
     private String fallback(Throwable error) {
-        logger.info("fallback invoked");
+        logger.info("fallback invoked: {}", error.getMessage());
         return "Try later";
     }
 }
