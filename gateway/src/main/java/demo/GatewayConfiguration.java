@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class GatewayConfig {
+public class GatewayConfiguration {
     @Bean
     public RouteLocator demoLocator(RouteLocatorBuilder builder) {
         return builder.routes()
