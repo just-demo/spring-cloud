@@ -1,5 +1,4 @@
 rootProject.name = 'spring-cloud-demo'
-include 'config-server'
 include 'eureka-server'
 include 'gateway'
 include 'service-one'

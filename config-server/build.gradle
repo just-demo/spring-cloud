@@ -1,9 +1,0 @@
-dependencies {
-	implementation 'org.springframework.cloud:spring-cloud-config-server'
-	// ########## Bus refresh ##########
-	implementation 'org.springframework.boot:spring-boot-starter-actuator'
-	implementation 'org.springframework.cloud:spring-cloud-bus'
-	implementation 'org.springframework.cloud:spring-cloud-stream-binder-rabbit'
-	// Needed for Discovery First Bootstrap only
-	// implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
-}

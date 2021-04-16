@@ -8,16 +8,4 @@ dependencies {
 	implementation 'org.springframework.cloud:spring-cloud-starter-sleuth'
 	implementation 'org.springframework.cloud:spring-cloud-sleuth-zipkin'
 	implementation 'org.springframework.boot:spring-boot-starter-amqp'
-
-	// ########## Config client ##########
-	implementation 'org.springframework.cloud:spring-cloud-starter-config'
-	implementation 'org.springframework.boot:spring-boot-starter-actuator'
-	implementation 'org.springframework.cloud:spring-cloud-bus'
-	implementation 'org.springframework.cloud:spring-cloud-stream-binder-rabbit'
-	// Discovery First Bootstrap only
-	// implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client' // duplicate
-	// implementation 'org.springframework.cloud:spring-cloud-starter-bootstrap'
-
-	// ########## Circuit Breaker ##########
-	implementation 'org.springframework.cloud:spring-cloud-starter-circuitbreaker-resilience4j'
 }

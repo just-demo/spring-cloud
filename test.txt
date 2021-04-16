@@ -1,40 +1,23 @@
-# Sample Web App
-http://localhost:8080/
-http://localhost:8080/actuator
-####################################################################################################
 gradlew bootBuildImage
-docker-compose up --scale service-one=2 --scale service-two=2
+docker-compose up -d --scale service-one=2 --scale service-two=2
+docker-compose logs -f -t
+docker-compose scale service-two=0
 ####################################################################################################
-TODO: bookmark all links or open in a text file
-
-# RabbitMQ
-http://localhost:15672 guest/guest
-
-# Zipkin
-http://localhost:9411
-
-# Config Server
-http://localhost:8888/gateway/default
-http://localhost:8888/gateway/dev
-http://localhost:8888/gateway/qa
-    fetch('/actuator/busrefresh', {method: 'POST'}).then(r => r.text()).then(console.log);
-
 # Eureka Server
 http://localhost:8761
 
 # Gateway
 http://localhost:8000
-http://localhost:8000/config
-    fetch('/actuator/refresh', {method: 'POST'}).then(r => r.text()).then(console.log);
 http://localhost:8000/one
 http://localhost:8000/two
-http://localhost:8000/test
-    # failure
-    for (var i = 0; i < 10; i++) fetch('/test').then(r => r.text()).then(console.log)
-    # delay
-    for (var i = 0; i < 3; i++) fetch('/test').then(r => r.text()).then(console.log)
 
 # Service One/Two - Instance 1/2
 http://localhost:****
+
+# Zipkin
+http://localhost:9411
+
+# RabbitMQ
+http://localhost:15672 guest/guest
 
 

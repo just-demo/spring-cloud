@@ -11,4 +11,7 @@ dependencies {
 
 	// ########## Declarative API client ##########
 	implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
+
+	// ########## Circuit Breaker ##########
+	implementation 'org.springframework.cloud:spring-cloud-starter-circuitbreaker-resilience4j'
 }

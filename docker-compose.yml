@@ -16,18 +16,6 @@ services:
     depends_on:
       - rabbitmq
     restart: on-failure
-  config-server:
-    image: config-server:0.0.1-SNAPSHOT
-    ports:
-      - 8888:8888
-    depends_on:
-      - rabbitmq
-    environment:
-      - spring.cloud.config.server.native.search-locations=/app/config
-#      Bus refresh of clients
-      - spring.rabbitmq.host=rabbitmq
-    volumes:
-      - ./config:/app/config
   eureka-server:
     image: eureka-server:0.0.1-SNAPSHOT
     ports:
@@ -37,11 +25,9 @@ services:
     ports:
       - 8000:8000
     depends_on:
-      - config-server
       - eureka-server
       - rabbitmq
     environment:
-      - spring.config.import=optional:configserver:http://config-server:8888
       - eureka.client.serviceUrl.defaultZone=http://eureka-server:8761/eureka/
       - spring.zipkin.baseUrl=http://zipkin:9411/
       - RABBIT_URI=amqp://rabbitmq
